@@ -1,0 +1,32 @@
+main{
+  height: 450px;
+ /* background-image: url("https://pixabay.com/static/uploads/photo/2016/04/01/22/32/world-1301744_960_720.png");*/
+
+}
+.footer{
+  width: 100%;
+  padding: 50px 0px;
+  
+}
+.container-footer{
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  max-width: 1200%;
+  margin: auto;
+}
+
+.box-foorter{
+  display: flex;
+  flex-direction: column;
+  margin: 10px;
+}
+
+.descrip-logo{
+  max-width: 350px;  
+}
+
+#map {
+	height: 100px;
+	width: 100px;
+}
