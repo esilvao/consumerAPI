@@ -74,6 +74,10 @@ async function chartValorMoneda(){
 
 }
 
+function linpiarInfoFicha() {
+  document.getElementById("fichaInfo").innerHTML=""
+}
+
 async function informacionmulti(modendaBase){
   try{
     const url =`https://api.fastforex.io/fetch-multi?from=${modendaBase}&to=%20ARS%2CBRL%2CMXN%2CUSD%2CEUR%2CGBP&api_key=5cfaf0173a-d0bfaf52d3-rn3ftj`
@@ -81,23 +85,23 @@ async function informacionmulti(modendaBase){
     const data = await response.json()
     const resultado = data.results
     let nombre
+    let titulo=`<h5 class="font-weight-bold d-flex justify-content-center">Informe de conversion de monedas ${data.updated}  </h5>`
     nombre = `<div class="col d-flex justify-content-around" >`
-      nombre = nombre +`<div class="card" style="width: 18rem;" >`
-      nombre = nombre +`<div class="card-body">`          
-          nombre=nombre+`<h5 class="card-title d-flex justify-content-center" >Moneda : 1 ${data.base} </h5>`
-          nombre=nombre+`<p class="card-text font-weight-bold d-flex justify-content-center">${data.updated} </p>`
+      nombre = nombre +`<div class="card" style="width: 16rem;" >`
+                
+          nombre=nombre+`<h6 class="card-title d-flex justify-content-center" >Moneda : 1 ${data.base} </h6>`
           nombre=nombre+`<hr>`
-          nombre=nombre+`<p class="card-text ">Peso Argentino: ${resultado.ARS} </p>`
-          nombre=nombre+`<p class="card-text ">Real brasileño: ${resultado.BRL} </p>`
-          nombre=nombre+`<p class="card-text ">Peso Mexicano : ${resultado.MXN} </p>`
-          nombre=nombre+`<p class="card-text ">Dolar : ${resultado.USD} </p>`
-          nombre=nombre+`<p class="card-text ">Euro : ${resultado.EUR} </p>`
-          nombre=nombre+`<p class="card-text ">Libra esterlina : ${resultado.USD} </p>`
-          nombre=nombre+`<p class="d-flex justify-content-center"><a href="#" style="width: 10rem;" class="btn btn-secondary">Mas Informacion</a></p>`
-          nombre = nombre+`</div>`
+          nombre=nombre+`<p ><small>Peso Argentino: ${resultado.ARS}</small></p>`
+          nombre=nombre+`<p ><small>Real brasileño: ${resultado.BRL}</small></p>`
+          nombre=nombre+`<p ><small>Peso Mexicano : ${resultado.MXN}</small></p>`
+          nombre=nombre+`<p ><small>Dolar : ${resultado.USD}</small> </p>`
+          nombre=nombre+`<p ><small>Euro : ${resultado.EUR} </small></p>`
+          nombre=nombre+`<p ><small>Libra esterlina : ${resultado.USD} </small> </p>`
+          nombre=nombre+`<p class="d-flex justify-content-center"><a href="#" style="width: 10rem;" > <small>Mas Informacion </small></a></p>`
+          
       nombre = nombre+`</div>`
     nombre = nombre+`</div>`
-   
+    document.getElementById("infoFecha").innerHTML= titulo
     document.getElementById("fichaInfo").innerHTML= document.getElementById("fichaInfo").innerHTML+nombre
   
   
@@ -109,28 +113,38 @@ async function informacionmulti(modendaBase){
 }
 
 
-
 const divbuscar = document.createElement('div')
 divbuscar.innerHTML=`
 <div class='mt-3'>
-  <h5>Buscar Moneda</h5>
+<div id='infoFecha'></div>
+  <h6>Buscar Moneda</h6>
   <select id = "selectMoneda"> 
   </select>
+  <input class="btn rounded-3 btn_propio" id="agregar" type="button" value="Agregar">
+  <input class="btn rounded-3 btn_propio" id="limpiar" type="button" value="Limpiar">
   <div id='infoTemp'></div>
 </div>
 <div class="container"> 
     <div class="row" id="fichaInfo">
     </div>
 </div>
-<div style="height:50%;width:50%;">
-<canvas id="grafico1" ></canvas>
+<hr>
+<div class="container">
+  <div class="row">
+    <div class="col">
+        <canvas id="grafico1" ></canvas>
+    </div>
+    <div class="col">
+        <canvas id="grafico2" ></canvas>
+    </div>
+  </div>
+</div>
 
-<canvas id="grafico2" ></canvas>
-</div>`
+
+`
 
 const main = document.getElementById("main")
 main.appendChild(divbuscar)
-informacionmulti("EUR")
 informacionmulti("USD")
 informacionmulti("CLP")
 informacioncurrencies()
@@ -138,3 +152,22 @@ informacioncurrencies()
 getDataTipoMoneda()
 chartValorMoneda()
 listarMoneda()
+
+const btn_agregar = document.querySelector("#agregar")
+btn_agregar.addEventListener("click",(e) => {
+  e.preventDefault()
+  var option = document.getElementById("selectMoneda");
+  let moneda = option.value
+  alert("Se va a cargar una ficha \n con informacion de conversion de 1 \n " + moneda.substring(4) )
+  informacionmulti(moneda.substring(0,3))
+
+})
+
+const btn_limpiar = document.querySelector("#limpiar")
+btn_limpiar.addEventListener("click",(e) => {
+  e.preventDefault()
+  linpiarInfoFicha()
+
+})
+
+
