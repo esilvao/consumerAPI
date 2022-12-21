@@ -1,8 +1,27 @@
+import {dibujaColFooterIMG,dibujaColFooter,colImagenFooter,colDespIndicador} from './footer.js'
 import {getFecha,fechaDesde,fechaHasta}  from './fecha.js'
 import {getData,valorMonedaArray,siglaMonedaArray,
        arrayValor,arrayFecha,getDataUltimosDias,
-       getDataTipoMoneda,arrayListMoneda,arrayListMonedaDescrip} from './datos.js'
+       getDataTipoMoneda,arrayListMoneda,arrayListMonedaDescrip,
+       getUFMes,arrayValorUF,arrayFechaUF,arrayValorDolar,arrayValorEuro} from './datos.js'
 
+async function dibujaFooter(){
+
+        await dibujaColFooterIMG()
+        await dibujaColFooter("UF")
+        await dibujaColFooter("UTM")
+        await dibujaColFooter("Dolar")
+        await dibujaColFooter("IVP")
+        await dibujaColFooter("IPC")
+        await dibujaColFooter("IMAC")
+        var divfooter = document.getElementById("containerFooter");
+        var divrow = document.createElement("div");
+        divrow.className="row align-items-center"
+        divrow.id="rowfooter"
+        divrow.innerHTML=colImagenFooter+colDespIndicador
+        divfooter.appendChild(divrow);
+       
+}
 async function listarMoneda(){
   await getDataTipoMoneda()
   var select = document.getElementById("selectMoneda");
@@ -43,6 +62,40 @@ async function informacioncurrencies(){
   }
 }
 
+async function chartValorUFMes(){ 
+
+  await getUFMes()
+  console.log("data "+ arrayValorUF)
+  console.log("data "+ arrayFechaUF)
+  console.log("data "+ arrayValorDolar)
+  const canvas = document.getElementById('grafico3'); 
+  const grafico3 = new Chart(canvas, { 
+  
+      type: 'bar',       
+      data:{
+          labels: arrayFechaUF, 
+          datasets: [
+              {
+                  label: 'Valor UF Mes', 
+                  data: arrayValorUF, 
+                  backgroundColor: 'rgb(75, 192, 192)',
+              },
+              {
+                label: 'Valor Dolar Mes', 
+                data: arrayValorDolar, 
+                backgroundColor: 'rgb(175, 200, 200)',
+              },
+              {
+                label: 'Valor Euro Mes', 
+                data: arrayValorEuro, 
+                backgroundColor: 'rgb(175, 100, 100)',
+              }
+          ]
+      },
+          
+  }) 
+
+}
 async function chartValorMoneda(){ 
 
   await getData("USD")
@@ -113,6 +166,7 @@ async function informacionmulti(modendaBase){
 }
 
 
+//Crear el contenido del main
 const divbuscar = document.createElement('div')
 divbuscar.innerHTML=`
 <div class='mt-3'>
@@ -128,7 +182,7 @@ divbuscar.innerHTML=`
     <div class="row" id="fichaInfo">
     </div>
 </div>
-<hr>
+
 <div class="container">
   <div class="row">
     <div class="col">
@@ -137,21 +191,31 @@ divbuscar.innerHTML=`
     <div class="col">
         <canvas id="grafico2" ></canvas>
     </div>
-  </div>
+    <div class="col">
+    <canvas id="grafico3" ></canvas>
 </div>
-
-
-`
+  </div>
+</div>`
 
 const main = document.getElementById("main")
 main.appendChild(divbuscar)
+
+//Crear el contenido del footer
+const divfooter = document.createElement('div')
+divfooter.className="container"
+divfooter.id="containerFooter"
+const footer = document.getElementById("footer")
+footer.appendChild(divfooter)
+dibujaFooter()
+
+
 informacionmulti("USD")
 informacionmulti("CLP")
 informacioncurrencies()
-
 getDataTipoMoneda()
 chartValorMoneda()
 listarMoneda()
+chartValorUFMes()
 
 const btn_agregar = document.querySelector("#agregar")
 btn_agregar.addEventListener("click",(e) => {
