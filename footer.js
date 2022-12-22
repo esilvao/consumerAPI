@@ -19,11 +19,11 @@ let valorNombre =""
   async function dibujaColFooter(indicador){
     await getApiIndicado(indicador.toLowerCase())
     const columnaIndicador =` <div class="col d-flex justify-content-evenly" >
-            <div class="card-footer" >
+            <div class="card-footer rounded-3" >
               <div class="card-body">
                 <h6 class="card-title">${indicador}</h6>
                 <p class="card-text"><small>${valorNombre}</small></p>
-                <p class="card-text"><small>${valorIndicador}</small></p>
+                <p class="card-text d-flex justify-content-center "><small>${valorIndicador}</small></p>
               </div>
             </div>
           </div>`
@@ -43,6 +43,7 @@ let valorNombre =""
       case "utm":
           valorIndicador = data.utm.valor
           valorNombre=data.utm.nombre
+          break
       case "dolar":
           valorIndicador = data.dolar.valor
           valorNombre=data.dolar.nombre

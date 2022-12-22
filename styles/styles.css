@@ -10,7 +10,6 @@ main{
 footer{
   width: 100%;
  display: flex;
-
   
 }
 
@@ -46,4 +45,12 @@ footer{
   margin-top: 10px;
   padding: 8px;
   line-height:0.2;
+}
+
+#grafico1,#grafico2,#grafico3{
+  max-height: 250px;
+}
+
+.miboton{
+  background-color: rgb(43, 191, 142);
 }
