@@ -9,7 +9,7 @@ let valorNombre =""
         <img src="https://pixabay.com/static/uploads/photo/2016/04/01/22/32/world-1301744_960_720.png" style="width:50px ;" alt="">
       </div>
       <div class="descrip-logo">
-        <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Provident incidunt possimus </p>
+        <p>Indicadores Economicos </p>
       </div>
     </div>
   </div> ` 

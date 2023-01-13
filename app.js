@@ -1,7 +1,7 @@
 import {dibujaColFooterIMG,dibujaColFooter,colImagenFooter,colDespIndicador} from './footer.js'
 import {getFecha,fechaDesde,fechaHasta}  from './fecha.js'
 import {getDataUFAnual,arrayFechaUFAnual,arrayValorUFAnual,
-       arrayValor,arrayFecha,getDataUltimosDias,
+       arrayValor,arrayFecha,getDolarUltimoMes,
        getDataTipoMoneda,arrayListMoneda,arrayListMonedaDescrip,
        getUFMes,arrayValorUF,arrayFechaUF,arrayValorDolar,arrayValorEuro} from './datos.js'
 
@@ -19,6 +19,7 @@ divbuscar.innerHTML=`
   
   <div class="p-2" id='infoTemp'></div>
 </div>
+<div>Principales Indicadores Económicos y Conversor de Monedas</div>
 <div class="container"> 
     <div class="row" id="fichaInfo">
     </div>
@@ -26,14 +27,13 @@ divbuscar.innerHTML=`
 <hr>
 <div class="container">
   <div class="row">
-    <div class="col col-sm-12 col-lg-6">
+    <div class="col-12 col-sm-12 col-lg-6">
         <canvas id="grafico1" ></canvas>
     </div>
-    <div class="col col-sm-12 col-lg-6">
+    <div class="col-12 col-sm-12 col-lg-6">
         <canvas id="grafico2" ></canvas>
     </div>
-   
-    <div class="col col-sm-12 col-lg-12 p-2">
+    <div class="col-12">
     <canvas id="grafico3" ></canvas>
 </div>
   </div>
@@ -66,17 +66,18 @@ btn_limpiar.addEventListener("click",(e) => {
 })
 
 
-informacionmulti("USD")
-informacionmulti("EUR")
-dropListMoneda()
+//informacionmulti("USD")
+//informacionmulti("EUR")
+//dropListMoneda()
 chartValorUFANNO()
-charDolar14Dias()
+charDolarMes()
 chartValorUFDolarEuroMes()
 dibujaFooter()
 
 async function dropListMoneda(){
   // llana el droplist que esta al principio de la pagina
 // con informacion del la sigla y el tipo de moneda
+/*
   await getDataTipoMoneda()
   var select = document.getElementById("selectMoneda");
   arrayListMoneda.forEach ((value)=>{
@@ -85,6 +86,8 @@ async function dropListMoneda(){
     option.text = value;
     select.appendChild(option);
     })
+    
+*/
  }
 
  // dinuja el footer
@@ -111,9 +114,6 @@ async function chartValorUFDolarEuroMes(){
   // llena el primer grafico con informacion de UF,Dolar y Euro
   //el mes se deja fijo
     await getUFMes()
-    console.log("data "+ arrayValorUF)
-    console.log("data "+ arrayFechaUF)
-    console.log("data "+ arrayValorDolar)
     const canvas = document.getElementById('grafico1'); 
     const grafico1 = new Chart(canvas, {     
         type: 'bar',       
@@ -140,12 +140,12 @@ async function chartValorUFDolarEuroMes(){
     }) 
   }
 
-async function charDolar14Dias(){
+async function charDolarMes(){
 // llena el segundo grafico con informacion de los ultimos 14 dias
 //lee la fecha actual y le resta los dias
   try{
     await getFecha()
-    await getDataUltimosDias(fechaDesde,fechaHasta)
+    await getDolarUltimoMes(fechaDesde,fechaHasta)
     const canvas = document.getElementById('grafico2'); 
     const grafico2 = new Chart(canvas, {     
         type: 'bar',       
@@ -153,7 +153,7 @@ async function charDolar14Dias(){
             labels: arrayFecha , 
             datasets: [
                 {
-                    label: 'Valor USD/CPL 14 dias', 
+                    label: 'Valor USD / CPL Ultimo mes', 
                     data: arrayValor, 
                     backgroundColor: 'rgb(75, 192, 192)',
                 }
@@ -172,11 +172,9 @@ async function charDolar14Dias(){
 
 
 async function chartValorUFANNO(){ 
-
   await getDataUFAnual("2022")
   const canvas = document.getElementById('grafico3'); 
   const grafico3 = new Chart(canvas, { 
-  
       type: 'line',       
       data:{
           labels: arrayFechaUFAnual, 
@@ -191,9 +189,7 @@ async function chartValorUFANNO(){
       fill: false,
       borderColor: 'rgb(75, 192, 192)',
       tension: 0.1
-          
   }) 
-
 }
 //****************************************************** */
 
@@ -203,6 +199,8 @@ function linpiarInfoFicha() {
 
 async function informacionmulti(modendaBase){
   try{
+    console.log("linpiarInfoFicha")
+    /*
     const url =`https://api.fastforex.io/fetch-multi?from=${modendaBase}&to=%20CLP%2CBRL%2CMXN%2CUSD%2CEUR%2CGBP&api_key=5cfaf0173a-d0bfaf52d3-rn3ftj`
     const response= await  fetch(url)
     const data = await response.json()
@@ -223,14 +221,8 @@ async function informacionmulti(modendaBase){
     nombre = nombre+`</div>`
     document.getElementById("infoFecha").innerHTML= titulo
     document.getElementById("fichaInfo").innerHTML= document.getElementById("fichaInfo").innerHTML+nombre
+    */
   }catch(error){
     console.log(error)
   }
 }
-
-
-
-
-
-
-

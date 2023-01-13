@@ -5,6 +5,8 @@
   La aplicacion no necesita instalacion de librerias adicionales, usa Chart.js para crear graficos, pero se incluye dentro del HTML con la etiqueta <script></script>. Las APIS utilizadas son libres pero deben tener APIKey ya incluidas en el proyecto
  
   <h2>Descripción y Uso</h2>
+  <img src="./assets/app.jpg" style="width:300px ;" alt="">
+      
   Esta aplicacion muestra una pagina principal con informacion de:
   <ul>
     <li>Drowlist con el listado de ls distintas monedas (consumo de API fastforex)</li>

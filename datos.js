@@ -7,7 +7,7 @@ async function getDataUFAnual(annoConsulta){
     //llena el primer grafico con el valor de la UF durante al año 2022
 
     const url=`https://api.sbif.cl/api-sbifv3/recursos_api/uf/${annoConsulta}?apikey=833f4e858f32e7b40a10d7c40ded6661e08811f3&formato=JSON`
-    console.log(url)
+   // console.log(url)
     const response =  await fetch(url)
     const data = await response.json()
     const fechaUF = data.UFs.map(uf => uf.Fecha)
@@ -17,26 +17,28 @@ async function getDataUFAnual(annoConsulta){
     arrayValorUFAnual = valorUF;
 }
 
-async function getDataUltimosDias(fechaDesde,fechaHasta){
+async function getDolarUltimoMes(fechaDesde,fechaHasta){
     //lista el valor del dolar de los ultimos 14 dias
     // informacion para el llenar el segundo grefico
-    const url =`https://api.fastforex.io/time-series?to=CLP&start=${fechaDesde}&end=${fechaHasta}&interval=P1D&api_key=5cfaf0173a-d0bfaf52d3-rn3ftj`
+    const url =`https://mindicador.cl/api/dolar`
     const response= await  fetch(url)
     const data = await response.json()
-    const resultado = data.results
-    const valores = JSON.stringify(resultado.CLP)
-    console.log ("valores " +valores)
-    let datos = JSON.parse(valores, (key, value) => {
-      arrayFecha.push(key);
-      arrayValor.push(value);
-      return value;
-
+    const fechaDolar = data.serie.map((dolar) => {
+        let fecha =  new Date(dolar.fecha)
+        let month = (fecha.getMonth() + 1).toString().padStart(2, "0");
+        let day   = fecha.getDate().toString().padStart(2, "0")
+        return fecha.getFullYear() +"-"+ month +"-"+ day;
     });
+    const valorDolar = data.serie.map(dolar => dolar.valor) 
+    console.log(data.serie.valor)
+    arrayFecha = fechaDolar
+    arrayValor = valorDolar
 }
 
 
 async function getDataTipoMoneda(){
     //lena droplist con informacion de la sigla y la descripcionde la moneda
+    /*
     const options = {method: 'GET', headers: {accept: 'application/json'}};
   
     const url =`https://api.fastforex.io/currencies?api_key=5cfaf0173a-d0bfaf52d3-rn3ftj`
@@ -52,7 +54,7 @@ async function getDataTipoMoneda(){
         return value;
     });
 
-  
+  */
     
 }
 
@@ -81,6 +83,6 @@ async function getUFMes(inicador){
 
 }
 export {getDataUFAnual, arrayFechaUFAnual,arrayValorUFAnual,
-        getDataUltimosDias,arrayFecha,arrayValor,
+        getDolarUltimoMes,arrayFecha,arrayValor,
         getDataTipoMoneda,arrayListMoneda,arrayListMonedaDescrip,
         getUFMes,arrayValorUF,arrayFechaUF,arrayValorDolar,arrayValorEuro}; 
