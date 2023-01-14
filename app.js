@@ -207,7 +207,7 @@ async function informacionmulti(modendaBase){
     const data = await response.json()
     const resultado = data.results
     let nombre
-    let titulo=`<h5 class="font-weight-bold d-flex justify-content-center">Informe de conversion de monedas ${data.updated}  </h5>`
+    let titulo=`<h6 class="font-weight-bold d-flex justify-content-center">Informe Economico</h6>`
     nombre = `<div class="col d-flex justify-content-around" >`
       nombre = nombre +`<div class="card" style="width: 16rem;" >`
           nombre=nombre+`<h6 class="card-title d-flex justify-content-center" >Moneda : 1 ${data.base} </h6>`

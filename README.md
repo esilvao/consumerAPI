@@ -1,6 +1,8 @@
 
 <h1>Proyecto de consumo de API</h1>
 
+<h5> Link para revisar sitio de dashboard https://esilvao.github.io/consumerAPI/ <h5>
+
   <h2>Instalación</h2>
   La aplicacion no necesita instalacion de librerias adicionales, usa Chart.js para crear graficos, pero se incluye dentro del HTML con la etiqueta <script></script>. Las APIS utilizadas son libres pero deben tener APIKey ya incluidas en el proyecto, api key  de monedas es de prueba y dura solo 7 dias
 
@@ -34,6 +36,8 @@ Se trabaja con API publica para la conversion de monedas (https://fastforex.read
 Se trabaja con canvas , pero no se necesita instalar ya que  se usa la etiqueta  de javascrip que permite su uso sin instalacion de librerias locales 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </div>
+
+
 
 
 
