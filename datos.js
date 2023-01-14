@@ -38,10 +38,10 @@ async function getDolarUltimoMes(fechaDesde,fechaHasta){
 
 async function getDataTipoMoneda(){
     //lena droplist con informacion de la sigla y la descripcionde la moneda
-    /*
+    
     const options = {method: 'GET', headers: {accept: 'application/json'}};
   
-    const url =`https://api.fastforex.io/currencies?api_key=5cfaf0173a-d0bfaf52d3-rn3ftj`
+    const url =`https://api.fastforex.io/currencies?api_key=ceba487744-b488709e8e-rohjdj`
     
     const response= await  fetch(url,options)
     const data = await response.json()
@@ -54,7 +54,7 @@ async function getDataTipoMoneda(){
         return value;
     });
 
-  */
+  
     
 }
 

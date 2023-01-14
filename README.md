@@ -2,7 +2,10 @@
 <h1>Proyecto de consumo de API</h1>
 
   <h2>Instalación</h2>
-  La aplicacion no necesita instalacion de librerias adicionales, usa Chart.js para crear graficos, pero se incluye dentro del HTML con la etiqueta <script></script>. Las APIS utilizadas son libres pero deben tener APIKey ya incluidas en el proyecto
+  La aplicacion no necesita instalacion de librerias adicionales, usa Chart.js para crear graficos, pero se incluye dentro del HTML con la etiqueta <script></script>. Las APIS utilizadas son libres pero deben tener APIKey ya incluidas en el proyecto, api key  de monedas es de prueba y dura solo 7 dias
+
+  <p><a href="https://fastforex.readme.io/reference/introduction"> fastforex Crear api key </a></p>
+  <p> Api Key creada el 14 de Enero 2022 (ceba487744-b488709e8e-rohjdj)</p>
  
   <h2>Descripción y Uso</h2>
   <img src="./assets/app.jpg" style="width:300px ;" alt="">

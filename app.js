@@ -39,6 +39,7 @@ divbuscar.innerHTML=`
   </div>
 </div>`
 
+
 const main = document.getElementById("main")
 main.appendChild(divbuscar)
 
@@ -66,9 +67,9 @@ btn_limpiar.addEventListener("click",(e) => {
 })
 
 
-//informacionmulti("USD")
-//informacionmulti("EUR")
-//dropListMoneda()
+informacionmulti("USD")
+informacionmulti("EUR")
+dropListMoneda()
 chartValorUFANNO()
 charDolarMes()
 chartValorUFDolarEuroMes()
@@ -77,7 +78,7 @@ dibujaFooter()
 async function dropListMoneda(){
   // llana el droplist que esta al principio de la pagina
 // con informacion del la sigla y el tipo de moneda
-/*
+
   await getDataTipoMoneda()
   var select = document.getElementById("selectMoneda");
   arrayListMoneda.forEach ((value)=>{
@@ -87,7 +88,7 @@ async function dropListMoneda(){
     select.appendChild(option);
     })
     
-*/
+
  }
 
  // dinuja el footer
@@ -200,8 +201,8 @@ function linpiarInfoFicha() {
 async function informacionmulti(modendaBase){
   try{
     console.log("linpiarInfoFicha")
-    /*
-    const url =`https://api.fastforex.io/fetch-multi?from=${modendaBase}&to=%20CLP%2CBRL%2CMXN%2CUSD%2CEUR%2CGBP&api_key=5cfaf0173a-d0bfaf52d3-rn3ftj`
+    
+    const url =`https://api.fastforex.io/fetch-multi?from=${modendaBase}&to=%20CLP%2CBRL%2CMXN%2CUSD%2CEUR%2CGBP&api_key=ceba487744-b488709e8e-rohjdj`
     const response= await  fetch(url)
     const data = await response.json()
     const resultado = data.results
@@ -221,7 +222,7 @@ async function informacionmulti(modendaBase){
     nombre = nombre+`</div>`
     document.getElementById("infoFecha").innerHTML= titulo
     document.getElementById("fichaInfo").innerHTML= document.getElementById("fichaInfo").innerHTML+nombre
-    */
+    
   }catch(error){
     console.log(error)
   }
